@@ -52,3 +52,8 @@ ylabel('$\epsilon\sqrt{N}$','Interpreter','latex','FontSize',20);
 %output telling user area under curve 
 outString = 'the area under the curve is %f. The plot shows that fractional error decreases according to 1/sqrt(N).';
 sprintf(outString,areaUnderCurve)
+
+%It can be shown that the error decreases according to 1/sqrt(N) by
+%calculating the sample variance, and taking the square root of the
+%variance. This gives the standard error, which by analytical solution is
+%equal to 1/sqrt(N)
