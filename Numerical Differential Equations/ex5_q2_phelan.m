@@ -43,8 +43,8 @@ plot(ts,ys,'o','MarkerSize',2);
 hold on;
 plot(t,v,'r');
 title('Step Size = .1');
-xlabel('Time');
-ylabel('Velocity');
+xlabel('Time (s)');
+ylabel('Velocity (m/s)');
 hold on;
 
 
@@ -89,8 +89,8 @@ plot(ts,ys,'o','MarkerSize',2);
 hold on;
 plot(t,v,'r');
 title('Step Size = 2');
-xlabel('Time');
-ylabel('Velocity');
+xlabel('Time (s)');
+ylabel('Velocity (m/s)');
 
 
 
