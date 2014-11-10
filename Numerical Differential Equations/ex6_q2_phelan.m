@@ -59,14 +59,61 @@ g = 9.8; %in m/s^2
 l = 2; %in m
 t = 0:step:endInt;
 thetaT = theta0*cos(t*sqrt(g/l));
+omegaT =-1*sqrt(g/l)*theta0*sin(t*sqrt(g/l));
+
+%energy calculations
+m = 1; %mass in kg
+
+kineticEEuler = (1/2)*m*(omegas*l).^2; %kinetic energy formula
+potentialEEuler = m*g*l*(1-cos(thetas)); %potential energy formula
+totalEEuler = kineticEEuler + potentialEEuler; %total energy
+
+kineticESmall = (1/2)*m*(omegaT*l).^2; %kinetic energy formula
+potentialESmall = m*g*l*(1-cos(thetaT)); %potential energy formula
+totalESmall = kineticESmall + potentialESmall; %total energy
 
 figure;
+%plotting displacement vs. time
+subplot(3,1,1);
 plot(ts,thetas,'r');
 hold on;
 plot(t,thetaT,'g');
-title('Euler Method vs. Small Angle Approximation');
 xlabel('Time (s)');
-ylabel('Displacement (rads)');
+ylabel('Displacement (rads)')
+title('Displacement vs. Time');
+legend('Euler','Small-Angle');
+
+%energy plots for Euler Method
+subplot(3,1,2);
+plot(ts,kineticEEuler,'r');
+xlabel('Time (s)');
+ylabel('Energy (J)');
+hold on;
+plot(ts,totalEEuler,'b');
+xlabel('Time (s)');
+ylabel('Energy (J)');
+hold on;
+plot(ts,potentialEEuler,'g');
+xlabel('Time (s)');
+ylabel('Energy (J)');
+title('Energy vs. Time for Euler Method');
+legend('Kinetic','Total','Potential');
+
+%energy plots for Small Angle Method
+subplot(3,1,3);
+plot(t,kineticESmall,'r');
+xlabel('Time (s)');
+ylabel('Energy (J)');
+hold on;
+plot(t,totalESmall,'b');
+xlabel('Time (s)');
+ylabel('Energy (J)');
+hold on;
+plot(t,potentialESmall,'g');
+xlabel('Time (s)');
+ylabel('Energy (J)');
+title('Energy vs. Time for Small Angle Approx');
+legend('Kinetic','Total','Potential');
 
 %Comments: 
 %
@@ -84,6 +131,10 @@ ylabel('Displacement (rads)');
 %
 %Note: program takes a while when run with time step .0001, but it gives
 %the best results. 
-
-    
+%
+%We can see clearly from the energy plots that the small angle
+%approximation does not conserve mechanical energy as accurately at large
+%angles as the Euler mathod approximation does. In the Euler approximation
+%method, using the .0001 time step, energy is conserved to a precision of
+%10^(-3).
     
