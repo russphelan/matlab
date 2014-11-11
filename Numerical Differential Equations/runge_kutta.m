@@ -7,21 +7,19 @@
 %By: Russell Phelan 11/7/14 for Computational Physics 281 at UMass Amherst
 
 clear all; 
+clear figure;
 
-totalSteps = 10000;
+step = input('Input step size in seconds: ');
+theta0 = input('Input initial angle from vertical in radians: ');
+
+
 startInt = 0; %start of time interval
 endInt = 10;  %end of time interval
-step = (endInt-startInt)/totalSteps; %called 'h' in Runge Kutta methods.
-                                     %Increment size of independent variable, usually of time.
-t0 = 0; %initial time value. 
-theta0 = 1.5; %initial theta value in radians. 
-w0 = 0; %starting angular velocity
+totalSteps = (endInt-startInt)/step;
 
-%plotting small angle analytic solution for comparison
-g = 9.8; %in m/s^2
-l = 2; %in m
-t = 0:step:endInt;
-thetaT = theta0*cos(t*sqrt(g/l));
+t0 = 0; %initial time value. 
+%theta0 = 1.5; %initial theta value in radians. currently taken from user
+w0 = 0; %starting angular velocity
 
 %runge kutta method for second order ODE solutions
 oldTheta = theta0;
@@ -69,13 +67,65 @@ for i=1:totalSteps
     
 end
 
+%plotting small angle analytic solution for comparison
+g = 9.8; %in m/s^2
+l = 2; %in m
+t = 0:step:endInt;
+thetaT = theta0*cos(t*sqrt(g/l));
+omegaT =-1*sqrt(g/l)*theta0*sin(t*sqrt(g/l));
 
-%plot(ts,omegas);
+%energy calculations
+m = 1; %mass in kg
 
+kineticEKutta = (1/2)*m*(omegas*l).^2; %kinetic energy formula
+potentialEKutta = m*g*l*(1-cos(thetas)); %potential energy formula
+totalEKutta = kineticEKutta + potentialEKutta; %total energy
 
- plot(ts,thetas,'r');
- hold on;
- plot(t,thetaT,'g');
-    
+kineticESmall = (1/2)*m*(omegaT*l).^2; %kinetic energy formula
+potentialESmall = m*g*l*(1-cos(thetaT)); %potential energy formula
+totalESmall = kineticESmall + potentialESmall; %total energy
+
+%plotting displacement vs. time
+subplot(3,1,1);
+plot(ts,thetas,'r');
+hold on;
+plot(t,thetaT,'g');
+xlabel('Time (s)');
+ylabel('Displacement (rads)')
+title('Displacement vs. Time');
+legend('Kutta','Small-Angle');
+
+%energy plots for Kutta Method
+subplot(3,1,2);
+plot(ts,kineticEKutta,'r');
+xlabel('Time (s)');
+ylabel('Energy (J)');
+hold on;
+plot(ts,totalEKutta,'b');
+xlabel('Time (s)');
+ylabel('Energy (J)');
+hold on;
+plot(ts,potentialEKutta,'g');
+xlabel('Time (s)');
+ylabel('Energy (J)');
+title('Energy vs. Time for Kutta Method');
+legend('Kinetic','Total','Potential');
+
+%energy plots for Small Angle Method
+subplot(3,1,3);
+plot(t,kineticESmall,'r');
+xlabel('Time (s)');
+ylabel('Energy (J)');
+hold on;
+plot(t,totalESmall,'b');
+xlabel('Time (s)');
+ylabel('Energy (J)');
+hold on;
+plot(t,potentialESmall,'g');
+xlabel('Time (s)');
+ylabel('Energy (J)');
+title('Energy vs. Time for Small Angle Approx');
+legend('Kinetic','Total','Potential')
+
     
     
