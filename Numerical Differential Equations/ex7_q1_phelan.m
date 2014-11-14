@@ -104,11 +104,19 @@ l = 2; %in m
 t = 0:step:endInt;
 thetaT = theta0*cos(t*sqrt(g/l));
 omegaT =-1*sqrt(g/l)*theta0*sin(t*sqrt(g/l));
+smallAnglePeriod = 2*pi*sqrt(l/g)
+
+for itr = 1:length(thetas)
+    smallAnglePers(itr) = smallAnglePeriod;
+end
 
 plot(thetas,periods);
 title('Period vs. Initial Theta');
 xlabel('Initial Theta (rads)');
 ylabel('Period (s)');
+hold on;
+plot(thetas,smallAnglePers);
+
 
 
 %energy calculations
