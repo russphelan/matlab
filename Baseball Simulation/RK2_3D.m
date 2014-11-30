@@ -55,9 +55,9 @@ rkeep = rkeep*3.2808;
 
 vkeep = vkeep*2.2369;
 
-%stem3(rkeep(:,1),rkeep(:,2),rkeep(:,3),'LineWidth',.1);
-%axis([0 60 -5 5 0 8]);
-%view(120,20);
+stem3(rkeep(1:200:end,1),rkeep(1:200:end,2),rkeep(1:200:end,3),'LineWidth',.1);
+axis([0 60 -5 5 0 8]);
+view(120,20);
 
 for i=1:length(rkeep)
 if(rkeep(i) < 60)
