@@ -1,15 +1,21 @@
-%Cannonball program by Russell J Phelan, Physics 281 Fall 2014
+%Trajectory Plotter
+%by Russell J Phelan, Physics 281 Fall 2014
 %This program plots the trajectory of a cannonball (particle) 
 
 clear all %clears all previous variables 
-close all %closes all open plots
+close all %closes all open figures
 
 %global variables
 g = 9.8; %in m/s^2
-
 v_0 = 20; %in m/s
+t_0 = 0; %starting time in seconds
+y_0 = 0; %initial y position of particle
+x_0 = 0; %initial x position of particle
 
-%calculate total time necessary for trajectories to complete, using v_0
+dt = .1; %time increment in s (must be small enough for good plot resolution)
+
+%calculate total time (t_f) necessary for trajectories to complete, using v_0.
+%Assumes particle is shot straight up.
 t_f = 0; %initial value
 yAt90 = [-4.9 v_0 0];
 rootsAt90 = roots(yAt90);
@@ -21,11 +27,6 @@ while (j <= 2)
         j = j + 1;
     end
 end
-t_0 = 0; %starting time in send
-t_inc = .1; %time increment in s (must be small enough for good plot resolution)
-
-x_0 = 0; %initial x position of cannonball
-y_0 = 0; %initial y position of cannonball
 
 %draw axes and target. Labels target
 axis([0 50 0 50]);
@@ -36,35 +37,30 @@ title('Cannonball Trajectory');
 line([24 29],[1.5 1.5],'Color','red','LineWidth',1); %creating target
 line([20 25],[3.2 3.2],'Color','red','LineWidth',1); %creating target
 
-xArrow = [.81 .71]; %both in units normalized to figure. 0<x<1.
-yArrow = [.2 .11];  %
-annotation('arrow',xArrow,yArrow); %draws arrow to target, with 'Target' label
-text(170,20,'Target');
-
-%tell user cannonball will be launched at v_0
-%disp('Cannonball will be launched at 50m/s')
-formatspec = 'Cannonball will be launched at %um/s\n';
+%tell user particle will be launched at v_0
+%disp('Particle will be launched at 50m/s')
+formatspec = 'Particle will be launched at %um/s\n';
 fprintf(formatspec,v_0)
 
 %main game loop
-for i=1:5,
+for i=0:5
     %ask user the launch angle, in degrees
     thetaDeg = input('enter launch angle in degrees above the horizontal (greater than 0): \n angle = ');
     thetaRad = degtorad(thetaDeg); %converting to radians
 
-    %find initial velocity components
+    %fnd initial velocity components by trig 
     v_0x = v_0 * cos(thetaRad);
     v_0y = v_0 * sin(thetaRad);
 
 
-    %creating time vector
-    t = t_0:t_inc:t_f;
+    %creating uniform time vector
+    t = t_0:dt:t_f;
 
-    %creating position vectors
+    %creating position vectors based on kinematic equations
     xPos = x_0 + v_0x*t; %no acceleration, ignoring air resistance
     yPos = y_0 + v_0y*t + (1/2)*(-g)*t.^2;
 
-    %finding where cannonball will land
+    %finding where particle will land (naive root finder) 
     root1 = (-v_0y + sqrt(v_0y^2 + 2*g*y_0))/(-g);%Together, these are the quadratic formula
     root2 = (-v_0y - sqrt(v_0y^2 + 2*g*y_0))/(-g);% 
     if (root1 > root2) %determines which root is greater; this is time when cannonball lands

@@ -58,6 +58,9 @@ vkeep = vkeep*2.2369;
 stem3(rkeep(1:200:end,1),rkeep(1:200:end,2),rkeep(1:200:end,3),'LineWidth',.1);
 axis([0 60 -5 5 0 8]);
 view(120,20);
+xlabel('Distance from Plate (ft)');
+zlabel('Height of Pitcher (ft)');
+ylabel('Width (ft)');
 
 for i=1:length(rkeep)
 if(rkeep(i) < 60)
@@ -66,6 +69,5 @@ else
     break;
 end
 end
-i
 
 return;
