@@ -36,7 +36,7 @@ Shown is a copper rod where one end was heated at 1000K, and the other at 0K.
 
 ![alt tag](pictures/temp-in-rod.tiff)
 
-Heat Conduction in Solid Sheet
+Heat Conduction in a Solid Sheet
 =======
 The same model was redesigned to work with a 2D sheet using [relaxation](http://en.wikipedia.org/wiki/Relaxation_(iterative_method)) methods approximate a partial differential equation. The below plot shows a sheet with 3 edges heated to 1000K, and one edge at 0K. 
 
