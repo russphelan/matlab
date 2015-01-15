@@ -6,13 +6,15 @@ These programs solve a few elementary problems in Physics, and showcase numerica
 How to Run
 ======
 
-The folders contain MatLab scripts, .m files. These files can be opened with any command-line, or GUI version of MatLab. Some of the scripts require console commands from the user; others will run to completion automatically. I will briefly describe how to use some of the simulations, and include sample output for comparison. 
+The folders contain MatLab scripts, .m files. These files can be opened with any command-line, or GUI version of MatLab. Some of the scripts require input from the user; others will run to completion automatically. 
 
 Baseball Simulation
 =======
-This script simulates the pitching of a baseball in 3D with drag, and magnus forces. That is to say, air resistance, and spin on the ball are accurately modeled. The user will be prompted for initial velocities in the x, y, and z directions, as well as a vector along which to direct spin. 
+This script simulates the pitching of a baseball in 3D with [drag](http://en.wikipedia.org/wiki/Drag_(physics)), and [Magnus](http://en.wikipedia.org/wiki/Magnus_effect) forces. The user will be prompted for initial velocities in the x, y, and z directions in mph, the [angular velocity](http://en.wikipedia.org/wiki/Angular_velocity) vector as a [unit vector](http://en.wikipedia.org/wiki/Unit_vector), and the magnitude of the angular velocity vector, or rate of spin, in Hz. 
 
-The vector is of the format [x y z], and represents three components in 3-space, as is standard. Direction of spin is determined by the right hand rule, so if a vector points upwards, spin is counter-clockwise. 
+The vector is of the format [x y z], where x, y, and z are the vector's components in 3D space. Direction of spin is determined by the [right-hand rule](http://en.wikipedia.org/wiki/Right-hand_rule), so if a vector points upwards, spin is counter-clockwise. The figure below demonstrates how direction of spin relates to the direction of the angular velocity vector, omega. 
+
+![alt tag](http://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Angular_velocity.svg/352px-Angular_velocity.svg.png)
 
 This trajectory is due to a 40Hz spin on the vector [0 0 1], or straight up. 
 
@@ -20,9 +22,9 @@ This trajectory is due to a 40Hz spin on the vector [0 0 1], or straight up.
 
 Comet Orbits
 =======
-This script emulates orbits of bodies around the Sun. The Sun is indicated in plots as a red circle. You can specify initial distance from the Sun in AU, as well as initial speed of the orbiting body, in AU/year. Due to these units, you can recover Earth's normal orbit by using 2*pi for initial orbiting speed. That way, Earth will complete 1 orbit in 1 Earth year. 
+This script emulates orbits of bodies around the Sun. The Sun is indicated in plots as a red circle. Positions of orbiting bodies are blue circles. You can specify initial distance from the Sun in AU, as well as initial speed of the orbiting body, in AU/year. Due to these units, you can recover Earth's normal orbit by using 2*pi for initial speed. That way, Earth will complete 1 orbit in 1 Earth year. 
 
-Using different values results in elliptical orbits. A plot of gravitational potential, kinetic, and total energy is provided for comparison of energy in different orbit types. This is a close-up of a body with an orbiting speed of pi AU/year. 
+Using different initial speeds, you can produce elliptical orbits. A plot of gravitational potential, kinetic, and total energy is provided for comparison of energy in different orbit types. Notice that total mechanical energy is conserved. This is a close-up of a body with an orbiting speed of pi AU/year. 
 
 ![alt tag](pictures/elliptic-orbit.tiff)
 
@@ -36,13 +38,13 @@ Shown is a copper rod where one end was heated at 1000K, and the other at 0K.
 
 Heat Conduction in Solid Sheet
 =======
-The same model was redesigned to work with a 2D sheet using relaxation methods of partial differential equations. The below plot shows a sheet with 3 edges heated to 1000K, and one edge at 0K. 
+The same model was redesigned to work with a 2D sheet using [relaxation](http://en.wikipedia.org/wiki/Relaxation_(iterative_method)) methods approximate a partial differential equation. The below plot shows a sheet with 3 edges heated to 1000K, and one edge at 0K. 
 
 ![alt tag](pictures/temp-in-sheet.tiff)
 
 Simple Pendulum
 =====
-This script emulates a simple pendulum: a swinging mass under the effects of gravity. Surprisingly, this differential equation has no simple analytic solution. I've compared a formula for the small-angle approximation function with the actual numerical solution, and shown in plots where they deviate. The energy plots show that energy is not perfectly conserved in the small-angle function, whereas it is very nearly so in my numerical calculations. 
+This script emulates a simple pendulum: a swinging mass under the effects of gravity. Surprisingly, this differential equation has no simple analytic solution. I've compared a formula for the small-angle approximation function with the numerical solution, and it can be seen in the plots how they deviate for angles that are not small. The energy plots show that energy is not perfectly conserved in the small-angle approximation, whereas it is very nearly so in the numerical calculation. 
 
 ![alt tag](pictures/pendulum.tiff)
 
@@ -60,6 +62,6 @@ This script solves a linear ODE to emulate air drag on a falling object. You ded
 
 Particle Trajectories
 ====
-This script is an interactive game in which the player tries to shoot a particle through two hoops. The player is prompted for the angle of the shot, and the resulting trajectory is plotting. 6 attempts are given before the game terminates. A message is displayed after each shot telling the player whether or not the shot was a hit. 
+This script is an interactive game in which the player tries to shoot a particle through two hoops. The player is prompted for the angle of the shot, and the resulting trajectory is plotted. 6 attempts are given before the game terminates. A message is displayed after each shot telling the player whether or not the shot was a hit. 
 
 ![alt tag](pictures/particle-trajectories-game.tiff)
