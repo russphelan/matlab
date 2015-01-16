@@ -65,3 +65,6 @@ Particle Trajectories
 This script is an interactive game in which the player tries to shoot a particle through two hoops. The player is prompted for the angle of the shot, and the resulting trajectory is plotted. 6 attempts are given before the game terminates. A message is displayed after each shot telling the player whether or not the shot was a hit. 
 
 ![alt tag](pictures/particle-trajectories-game.tiff)
+
+
+Copyright (c) 2015 Russell J. Phelan under the MIT license. See license.txt. 
